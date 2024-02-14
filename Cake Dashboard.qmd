@@ -1,0 +1,51 @@
+---
+title: "Valentine's Day"
+format: dashboard
+---
+
+Today is Valentine's Day, so the Valentine's Day dashboard is set up here. 
+"Roses are red, violets are blue,
+I asked my cat to be my Valentine, it said 'Meow.'
+Guess that's a yes in the language of love! 😻❤️ #ValentinesWithMyFurryFriend" 
+
+## Row {height="25%"}
+
+```{r}
+#| component: valuebox
+list(
+  title="Valentine's Day Cake",
+  value= 2200,
+  color="red",
+  icon="cake2"
+)
+```
+
+```{r}
+library(tidyverse)
+Bakery <- read.csv("C:/Users/Dr. Nu Nu Khaing/Desktop/Quarto/Bakery.csv") # replace with your data file
+```
+
+```{r}
+attach(Bakery)
+Bakery <- Bakery|>
+  dplyr::mutate_if(is.character, factor) |>
+  as.data.frame()
+
+ggplot(Bakery,
+       aes(y=TransactionNo, fill=Daypart))+
+  geom_histogram()
+```
+
+## Row {height="25%"}
+
+```{r}
+#| component: valuebox
+list(
+  title="Valentine's Day Flowers",
+  value= 1500,
+  color="green",
+  icon="flower3"
+)
+```
+
+![Valentine Flowers](Flowers.png)
