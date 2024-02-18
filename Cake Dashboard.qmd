@@ -23,21 +23,30 @@ list(
 ```{r}
 library(tidyverse)
 Bakery <- read.csv("C:/Users/Dr. Nu Nu Khaing/Desktop/Quarto/Bakery.csv") # replace with your data file
-```
 
-```{r}
 attach(Bakery)
 Bakery <- Bakery|>
   dplyr::mutate_if(is.character, factor) |>
   as.data.frame()
 
+Bakery$Daypart <- factor(Bakery$Daypart,ordered=T, labels=c("Morning","Afternoon","Evening","Night"))
+
 ggplot(Bakery,
        aes(y=TransactionNo, fill=Daypart))+
-  geom_histogram()
+  geom_boxplot(color="grey2")+
+  scale_fill_brewer(palette="Pastel2")
+```
+
+```{r}
+ggplot(Bakery,
+       aes(x=Daypart, fill=Daypart))+
+  geom_dotplot(color="grey2", binwidth = 1.5, dotsize = 1,
+               stackratio = .01)+
+  scale_fill_brewer(palette="Accent")
 ```
 
 ## Row {height="25%"}
-
+### Column
 ```{r}
 #| component: valuebox
 list(
@@ -49,3 +58,18 @@ list(
 ```
 
 ![Valentine Flowers](Flowers.png)
+
+### Column
+
+
+```{r}
+attach(iris)
+library(ggplot2)
+ggplot(iris,
+       aes(x=Sepal.Length, fill=Species))+
+  geom_density(alpha=0.5)+
+  theme(legend.position="none")+
+  labs(x= "Flowers")+
+  scale_fill_brewer(palette="Dark2")
+```
+
